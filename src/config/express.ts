@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import userRoutes from '../application/user/UserRoutes'
+import userRoutes from '../application/user/user.routes'
 
 function configureApp(app: express.Application) {
 
