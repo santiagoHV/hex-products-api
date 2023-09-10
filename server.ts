@@ -1,14 +1,11 @@
-import app from './src/config/express'
-import morgan from 'morgan'
-import cors from 'cors'
-import bodyParser from 'body-parser'
+import express from 'express'
+import configureApp from './src/config/express'
 
-const PORT = process.env.PORT || 3000
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(morgan('dev')); // Middleware para registrar las solicitudes en la consola (solo para desarrollo)
-app.use(cors()); // Middleware para habilitar CORS (Cross-Origin Resource Sharing)
-app.use(bodyParser.json()); // Middleware para analizar solicitudes con formato JSON
+configureApp(app);
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`)
-    })
+    console.log(`Servidor en ejecución en el puerto ${PORT}`);
+});
