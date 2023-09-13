@@ -1,26 +1,35 @@
 import { User } from '../../domain/user/user.entity';
-import { UserRepository } from '../../infrastructure/persistence/mock/user.repository';
+import { UserRepository } from '../../domain/user/user.repository';
+import { UserDTO } from '../../domain/user/user.dto';
 
 export class UserService {
     constructor(private userRepository: UserRepository) {}
 
-    async getAllUsers(): Promise<User[]> {
-        return this.userRepository.findAll();
+    registerUser = async(userData : UserDTO): Promise<UserDTO> => {
+        return userData
     }
 
-    async getUserById(id: string): Promise<User | undefined> {
-        return this.userRepository.findById(id);
+    getUser = async(userId : string): Promise<UserDTO | null> => {
+        return null
     }
 
-    async createUser(user: User): Promise<void> {
-        await this.userRepository.create(user);
-    }
+    // async getAllUsers(): Promise<User[]> {
+    //     return this.userRepository.findAll();
+    // }
 
-    async updateUser(id: string, updatedUser: User): Promise<void> {
-        await this.userRepository.update(id, updatedUser);
-    }
+    // async getUserById(id: string): Promise<User | undefined> {
+    //     return this.userRepository.findById(id);
+    // }
 
-    async deleteUser(id: string): Promise<void> {
-        await this.userRepository.delete(id);
-    }
+    // async createUser(user: User): Promise<void> {
+    //     await this.userRepository.create(user);
+    // }
+
+    // async updateUser(id: string, updatedUser: User): Promise<void> {
+    //     await this.userRepository.update(id, updatedUser);
+    // }
+
+    // async deleteUser(id: string): Promise<void> {
+    //     await this.userRepository.delete(id);
+    // }
 }

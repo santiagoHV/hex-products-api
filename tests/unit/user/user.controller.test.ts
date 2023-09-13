@@ -1,6 +1,6 @@
 import { UserController } from '../../../src/application/user/user.controller';
 import { UserService } from '../../../src/application/user/user.service';
-import { UserRepository } from '../../../src/infrastructure/persistence/mock/user.repository';
+import { UserRepository } from '../../../src/infrastructure/persistence/mock/mockUser.repository';
 
 describe('UserController', () => {
     let userController: UserController;
