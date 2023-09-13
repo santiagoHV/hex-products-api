@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import bodyParser from 'body-parser'
-import userRoutes from '../application/user/user.routes'
+import { configureRouters } from './routes';
 
 function configureApp(app: express.Application) {
 
@@ -10,7 +10,7 @@ function configureApp(app: express.Application) {
     app.use(cors()); // Middleware para habilitar CORS (Cross-Origin Resource Sharing)
     app.use(bodyParser.json()); // Middleware para analizar solicitudes con formato JSON
 
-    app.use('/api/users', userRoutes);
+    configureRouters(app);
     app.get('/', (req, res) => {
         res.send('Hello World!')
         })

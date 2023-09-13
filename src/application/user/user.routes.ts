@@ -1,10 +1,27 @@
-import express from 'express'
-import { UserController } from './user.controller'
+import express, { Request, Response, Router } from 'express';
+import { UserController } from './user.controller';
 
-const router = express.Router()
-// const userController = new UserController()
+export class UserRoutes {
+    private router: Router = express.Router();
 
-// router.get('/:id', userController.getUserById)
-// router.post('/', userController.createUser)
+    constructor(
+        private userController: UserController
+    ) {
+        this.initializeRoutes();
+    }
 
-export default router
+    private initializeRoutes() {
+        this.router.post('/register', async (req: Request, res: Response) => {
+        await this.userController.registerUser(req, res);
+        });
+
+        this.router.get('/:id', async (req: Request, res: Response) => {
+        await this.userController.getUser(req, res);
+        });
+
+    }
+
+    getRouter(): Router {
+        return this.router;
+    }
+}
