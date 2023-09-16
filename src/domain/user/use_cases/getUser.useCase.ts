@@ -1,5 +1,5 @@
-import { UserRepository } from "./user.repository";
-import { UserDTO } from "./user.dto";
+import { UserRepository } from "../user.repository";
+import { UserDTO } from "../user.dto";
 
 export class GetUserUseCase {
     constructor(private userRepository: UserRepository) {}

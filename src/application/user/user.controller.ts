@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
-import { RegisterUserUseCase } from '../../domain/user/registerUser.useCase';
-import { GetUserUseCase } from '../../domain/user/getUser.useCase';
+import { RegisterUserUseCase } from '../../domain/user/use_cases/registerUser.useCase';
+import { GetUserUseCase } from '../../domain/user/use_cases/getUser.useCase';
+import { UpdateUserUseCase } from '../../domain/user/use_cases/updateUser.useCase';
 
 
 export class UserController {
     constructor(
         private registerUserUseCase: RegisterUserUseCase,
         private getUserUseCase: GetUserUseCase, 
+        private updateUserUseCase: UpdateUserUseCase
     ) {}
 
     registerUser = async (request: Request, response: Response) => {
@@ -35,41 +37,14 @@ export class UserController {
         }
     }
 
-    // getAllUsers = async (req: Request, res: Response): Promise<void> => {
-    //     console.log(this)
-    //     const users = await this.userService.getAllUsers();
-    //     res.json(users);
-    // }
+    updateUser = async(request: Request, response: Response) => {
+        try{
+            const userData = request.body;
+            const user = await this.updateUserUseCase.execute(userData);
 
-    // getUserById = async (req: Request, res: Response): Promise<void> => {
-    //     const { id } = req.params;
-    //     const user = await this.userService.getUserById(id);
-    //     if (user) {
-    //         res.json(user);
-    //     } else {
-    //         res.status(404).json({ message: 'User not found' });
-    //     }
-    // }
-
-    // createUser = async (req: Request, res: Response): Promise<void> => {
-    //     const { username, email } = req.body;
-    //     const newUser = new User(username, email, 'id');
-    //     await this.userService.createUser(newUser);
-    //     console.log(newUser);
-    //     res.status(201).json({ message: 'User created successfully' });
-    // }
-
-    // updateUser = async(req: Request, res: Response): Promise<void> => {
-    //     const { id } = req.params;
-    //     const { username, email } = req.body;
-    //     const updatedUser = new User(username, email, 'id');
-    //     await this.userService.updateUser(id, updatedUser);
-    //     res.json({ message: 'User updated successfully' });
-    // }
-
-    // deleteUser  = async (req: Request, res: Response): Promise<void> => {
-    //     const { id } = req.params;
-    //     await this.userService.deleteUser(id);
-    //     res.json({ message: 'User deleted successfully' });
-    // }
+            response.status(201).json(user);
+        }catch(error){
+            response.status(500).json({ error: 'Error al actualizar usuario' });
+        }
+    }
 }

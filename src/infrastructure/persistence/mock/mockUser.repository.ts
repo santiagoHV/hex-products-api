@@ -14,4 +14,14 @@ export class MockUserRepository implements UserRepository{
         const user = users.find((user) => user.id === userId)
         return Promise.resolve(user || null);
     }
+
+    updateUser(userData: UserDTO): Promise<UserDTO | null> {
+        const userIndex = users.findIndex((user) => user.id === userData.id)
+        if (userIndex === -1) {
+            return Promise.resolve(null)
+        }
+        users[userIndex] = userData
+
+        return Promise.resolve(userData)
+    }
 }

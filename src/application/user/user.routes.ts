@@ -19,6 +19,10 @@ export class UserRoutes {
         await this.userController.getUser(req, res);
         });
 
+        this.router.put('/', async (req: Request, res: Response) => {
+            await this.userController.updateUser(req, res);
+        })
+
     }
 
     getRouter(): Router {
